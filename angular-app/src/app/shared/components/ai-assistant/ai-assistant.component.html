@@ -1,0 +1,86 @@
+<div class="ai-assistant-container">
+  
+  <!-- Header -->
+  <div class="assistant-header">
+    <div class="header-content">
+      <mat-icon class="ai-icon">assistant</mat-icon>
+      <h2>AI Assistant</h2>
+      <div class="status-badge" *ngIf="isProcessing()">
+        <mat-icon>mic</mat-icon>
+        <span>Thinking...</span>
+      </div>
+    </div>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  
+  <!-- Error Message -->
+  <div class="error-banner" *ngIf="error()">
+    <mat-icon>error_outline</mat-icon>
+    <span>{{ error() }}</span>
+  </div>
+  
+  <!-- Messages Container -->
+  <div class="messages-container" #messagesContainer>
+    
+    @for (message of messages(); track $index) {
+      <div class="message-wrapper" [class.user-message]="message.role === 'user'">
+        <div class="avatar">
+          @if (message.role === 'assistant') {
+            <mat-icon class="ai-avatar">smart_toy</mat-icon>
+          } @else {
+            <mat-icon class="user-avatar">person</mat-icon>
+          }
+        </div>
+        <div class="message-bubble">
+          <div class="message-content" [innerHTML]="message.content | linkify"></div>
+          <div class="message-time">
+            {{ message.timestamp | date:'shortTime' }}
+          </div>
+        </div>
+      </div>
+    }
+    
+    <!-- Typing indicator -->
+    @if (isProcessing()) {
+      <div class="message-wrapper assistant-message">
+        <div class="avatar">
+          <mat-icon class="ai-avatar">smart_toy</mat-icon>
+        </div>
+        <div class="message-bubble typing-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    }
+    
+  </div>
+  
+  <!-- Input Area -->
+  <div class="input-area">
+    <mat-form-field appearance="outline" class="message-input">
+      <mat-label>Ask me anything...</mat-label>
+      <textarea
+        matInput
+        [(ngModel)]="userInput"
+        (keypress)="onKeyPress($event)"
+        rows="2"
+        placeholder="Type your question here..."
+        [disabled]="isProcessing()">
+      </textarea>
+      <mat-icon matSuffix class="input-icon">chat</mat-icon>
+    </mat-form-field>
+    
+    <button
+      mat-fab
+      color="primary"
+      class="send-button"
+      (click)="sendMessage()"
+      [disabled]="!userInput().trim() || isProcessing()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+  
+</div>

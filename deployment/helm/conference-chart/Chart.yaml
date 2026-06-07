@@ -1,0 +1,4 @@
+apiVersion: v2
+name: conference-chart
+description: Helm chart for Conference Platform
+version: 0.1.0

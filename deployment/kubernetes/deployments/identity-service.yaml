@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: identity-service
+  namespace: conference
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: identity-service
+  template:
+    metadata:
+      labels:
+        app: identity-service
+    spec:
+      containers:
+      - name: app
+        image: conference/identity-service:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ConnectionStrings__PostgreSQL
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: connection-string

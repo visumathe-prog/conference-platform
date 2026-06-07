@@ -1,0 +1,107 @@
+<!-- GDPR Cookie Banner -->
+<div class="gdpr-banner" *ngIf="!cookieConsentGiven()">
+  <div class="gdpr-container">
+    <div class="gdpr-content">
+      <div class="gdpr-icon">🔒</div>
+      <div class="gdpr-text">
+        <h3>Datenschutzeinstellungen</h3>
+        <p>Wir verwenden Cookies, um Ihre Präferenzen zu speichern und unsere Dienste zu verbessern.</p>
+      </div>
+      <div class="gdpr-buttons">
+        <button (click)="acceptAllCookies()" class="btn-primary">Alle akzeptieren</button>
+        <button (click)="acceptEssentialOnly()" class="btn-secondary">Nur Notwendige</button>
+        <button (click)="openCookieSettings()" class="btn-text">Einstellungen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Impressum Modal -->
+<div class="modal" *ngIf="showImprintModal" (click)="closeModals()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Impressum</h2>
+      <button (click)="closeModals()" class="close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <h3>Angaben gemäß § 5 TMG</h3>
+      <p><strong>ConferenceHub GmbH</strong><br>
+      Musterstraße 123<br>
+      10115 Berlin<br>
+      Deutschland</p>
+      <h3>Vertreten durch:</h3>
+      <p>Dr. Anna Schmidt (Geschäftsführerin)</p>
+      <h3>Kontakt:</h3>
+      <p>Telefon: +49 30 12345678<br>
+      E-Mail: info@conferencehub.de</p>
+      <h3>Registereintrag:</h3>
+      <p>Amtsgericht Berlin, HRB 123456 B</p>
+    </div>
+  </div>
+</div>
+
+<!-- Datenschutzerklärung Modal -->
+<div class="modal" *ngIf="showPrivacyModal" (click)="closeModals()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Datenschutzerklärung</h2>
+      <button (click)="closeModals()" class="close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <h3>1. Datenschutz auf einen Blick</h3>
+      <p>Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst.</p>
+      <h3>2. Ihre Rechte (Art. 15-22 DSGVO)</h3>
+      <ul>
+        <li>Auskunft über Ihre gespeicherten Daten (Art. 15)</li>
+        <li>Berichtigung unrichtiger Daten (Art. 16)</li>
+        <li>Löschung Ihrer Daten (Art. 17)</li>
+        <li>Einschränkung der Verarbeitung (Art. 18)</li>
+        <li>Datenübertragbarkeit (Art. 20)</li>
+        <li>Widerspruch gegen die Verarbeitung (Art. 21)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie Settings Modal -->
+<div class="modal" *ngIf="showCookieSettings" (click)="closeModals()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Cookie-Einstellungen</h2>
+      <button (click)="closeModals()" class="close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="cookie-category">
+        <div>
+          <h3>Notwendige Cookies</h3>
+          <p>Immer aktiv - Für den Betrieb der Website erforderlich.</p>
+        </div>
+        <span class="badge">Immer aktiv</span>
+      </div>
+      <div class="cookie-category">
+        <div>
+          <h3>Funktionale Cookies</h3>
+          <p>Ermöglichen verbesserte Funktionalität.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="functional">
+          <span class="slider"></span>
+        </label>
+      </div>
+      <div class="cookie-category">
+        <div>
+          <h3>Analyse-Cookies</h3>
+          <p>Helfen uns, die Nutzung der Website zu verstehen.</p>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="analytics">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button (click)="acceptAllCookies()" class="btn-primary">Alle akzeptieren</button>
+      <button (click)="closeModals()" class="btn-secondary">Speichern</button>
+    </div>
+  </div>
+</div>
